@@ -1,0 +1,31 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega16"</DEVICE>
+ <WORKING_DIR>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m16def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\Debug\HRY_411_Proj1_Timer.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>HRY_411_Proj1_Timer.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>HRY_411_Proj1_Timer.map</FILE>
+  <FILE>HRY_411_Proj1_Timer.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <Main><FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</FILE><LINE>20</LINE></Main>
+  <ResetInterrupts><FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</FILE><LINE>50</LINE></ResetInterrupts>
+  <label><FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</FILE><LINE>47</LINE></label>
+  <_clear_><FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</FILE><LINE>62</LINE></_clear_>
+  <_set_><FILE>C:\Users\jim_1\Desktop\Ενσωματωμένα Εργαστήριο\Εργαστήριο 1 Ενσωματωμένα\HRY_411_Proj1_Timer\HRY_411_Proj1_Timer\main.asm</FILE><LINE>58</LINE></_set_>
+ </LABELS>
+</ASSEMBLER_INFO>
