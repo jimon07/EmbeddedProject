@@ -1,0 +1,8 @@
+
+$log PORTA
+$log TCNT2
+$startlog lab7Scheduler.log
+
+
+#100000000
+$stoplog
