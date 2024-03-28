@@ -1,0 +1,1094 @@
+
+HRY_411_Project8.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000065e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  0000065e  000006d2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000006e6  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000718  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000b0  00000000  00000000  00000754  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000008e7  00000000  00000000  00000804  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000647  00000000  00000000  000010eb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000063a  00000000  00000000  00001732  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000026c  00000000  00000000  00001d6c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000440  00000000  00000000  00001fd8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000038f  00000000  00000000  00002418  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000a0  00000000  00000000  000027a7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 a2 01 	jmp	0x344	; 0x344 <__vector_6>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 c6 01 	jmp	0x38c	; 0x38c <__vector_11>
+  30:	0c 94 ea 01 	jmp	0x3d4	; 0x3d4 <__vector_12>
+  34:	0c 94 0e 02 	jmp	0x41c	; 0x41c <__vector_13>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e5       	ldi	r30, 0x5E	; 94
+  68:	f6 e0       	ldi	r31, 0x06	; 6
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <main>
+  7a:	0c 94 2d 03 	jmp	0x65a	; 0x65a <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <ProcStart>:
+void sendAns(){
+	// 	enable UDRIE Flag
+	UCSRB = (1<<UDRIE)|(1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE);
+}
+void ProcStart(){
+	InstrAddress +=1;
+  82:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+  86:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+  8a:	cf 01       	movw	r24, r30
+  8c:	01 96       	adiw	r24, 0x01	; 1
+  8e:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+  92:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+	switch(*InstrAddress){
+  96:	81 81       	ldd	r24, Z+1	; 0x01
+  98:	82 33       	cpi	r24, 0x32	; 50
+  9a:	59 f0       	breq	.+22     	; 0xb2 <ProcStart+0x30>
+  9c:	83 33       	cpi	r24, 0x33	; 51
+  9e:	81 f0       	breq	.+32     	; 0xc0 <ProcStart+0x3e>
+  a0:	81 33       	cpi	r24, 0x31	; 49
+  a2:	a1 f4       	brne	.+40     	; 0xcc <ProcStart+0x4a>
+		case ASCII_1:
+		*Proc1Active = 1;
+  a4:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <Proc1Active>
+  a8:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <Proc1Active+0x1>
+  ac:	81 e0       	ldi	r24, 0x01	; 1
+  ae:	80 83       	st	Z, r24
+		break;
+  b0:	0d c0       	rjmp	.+26     	; 0xcc <ProcStart+0x4a>
+		case ASCII_2:
+		*Proc2Active = 1;
+  b2:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <Proc2Active>
+  b6:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <Proc2Active+0x1>
+  ba:	81 e0       	ldi	r24, 0x01	; 1
+  bc:	80 83       	st	Z, r24
+		break;
+  be:	06 c0       	rjmp	.+12     	; 0xcc <ProcStart+0x4a>
+		case ASCII_3:
+		*Proc3Active = 1;
+  c0:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  c4:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+  c8:	81 e0       	ldi	r24, 0x01	; 1
+  ca:	80 83       	st	Z, r24
+// Process 3 active
+volatile uint8_t *Proc3Active = (uint8_t *)0x00B7;
+
+void sendAns(){
+	// 	enable UDRIE Flag
+	UCSRB = (1<<UDRIE)|(1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE);
+  cc:	88 ef       	ldi	r24, 0xF8	; 248
+  ce:	8a b9       	out	0x0a, r24	; 10
+		case ASCII_3:
+		*Proc3Active = 1;
+		break;
+	}
+	sendAns();
+	InstrAddress = (uint8_t *)0x00A0;
+  d0:	80 ea       	ldi	r24, 0xA0	; 160
+  d2:	90 e0       	ldi	r25, 0x00	; 0
+  d4:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+  d8:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+  dc:	08 95       	ret
+
+000000de <ProcQuit>:
+	
+}
+void ProcQuit(){
+	InstrAddress +=1;
+  de:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+  e2:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+  e6:	cf 01       	movw	r24, r30
+  e8:	01 96       	adiw	r24, 0x01	; 1
+  ea:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+  ee:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+	switch(*InstrAddress){
+  f2:	81 81       	ldd	r24, Z+1	; 0x01
+  f4:	82 33       	cpi	r24, 0x32	; 50
+  f6:	51 f0       	breq	.+20     	; 0x10c <ProcQuit+0x2e>
+  f8:	83 33       	cpi	r24, 0x33	; 51
+  fa:	71 f0       	breq	.+28     	; 0x118 <ProcQuit+0x3a>
+  fc:	81 33       	cpi	r24, 0x31	; 49
+  fe:	89 f4       	brne	.+34     	; 0x122 <ProcQuit+0x44>
+		case ASCII_1:
+		*Proc1Active = 0;
+ 100:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <Proc1Active>
+ 104:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 108:	10 82       	st	Z, r1
+		break;
+ 10a:	0b c0       	rjmp	.+22     	; 0x122 <ProcQuit+0x44>
+		case ASCII_2:
+		*Proc2Active = 0;
+ 10c:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <Proc2Active>
+ 110:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 114:	10 82       	st	Z, r1
+		break;
+ 116:	05 c0       	rjmp	.+10     	; 0x122 <ProcQuit+0x44>
+		case ASCII_3:
+		*Proc3Active = 0;
+ 118:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 11c:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 120:	10 82       	st	Z, r1
+// Process 3 active
+volatile uint8_t *Proc3Active = (uint8_t *)0x00B7;
+
+void sendAns(){
+	// 	enable UDRIE Flag
+	UCSRB = (1<<UDRIE)|(1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE);
+ 122:	88 ef       	ldi	r24, 0xF8	; 248
+ 124:	8a b9       	out	0x0a, r24	; 10
+		case ASCII_3:
+		*Proc3Active = 0;
+		break;
+	}
+	sendAns();
+	InstrAddress = (uint8_t *)0x00A0;
+ 126:	80 ea       	ldi	r24, 0xA0	; 160
+ 128:	90 e0       	ldi	r25, 0x00	; 0
+ 12a:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+ 12e:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+ 132:	08 95       	ret
+
+00000134 <CTC_Timer_Interrupt>:
+}
+void CTC_Timer_Interrupt(){
+	
+	switch(*CurrProcess){
+ 134:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <CurrProcess>
+ 138:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <CurrProcess+0x1>
+ 13c:	80 81       	ld	r24, Z
+ 13e:	82 30       	cpi	r24, 0x02	; 2
+ 140:	31 f1       	breq	.+76     	; 0x18e <CTC_Timer_Interrupt+0x5a>
+ 142:	83 30       	cpi	r24, 0x03	; 3
+ 144:	09 f4       	brne	.+2      	; 0x148 <CTC_Timer_Interrupt+0x14>
+ 146:	43 c0       	rjmp	.+134    	; 0x1ce <CTC_Timer_Interrupt+0x9a>
+ 148:	81 30       	cpi	r24, 0x01	; 1
+ 14a:	09 f0       	breq	.+2      	; 0x14e <CTC_Timer_Interrupt+0x1a>
+ 14c:	5f c0       	rjmp	.+190    	; 0x20c <CTC_Timer_Interrupt+0xd8>
+		case 1:
+		if (*Proc2Active == 1)
+ 14e:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <Proc2Active>
+ 152:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 156:	8c 91       	ld	r24, X
+ 158:	81 30       	cpi	r24, 0x01	; 1
+ 15a:	19 f4       	brne	.+6      	; 0x162 <CTC_Timer_Interrupt+0x2e>
+		{
+			*CurrProcess = 2;
+ 15c:	82 e0       	ldi	r24, 0x02	; 2
+ 15e:	80 83       	st	Z, r24
+ 160:	73 c0       	rjmp	.+230    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if (*Proc3Active)
+ 162:	a0 91 60 00 	lds	r26, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 166:	b0 91 61 00 	lds	r27, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 16a:	8c 91       	ld	r24, X
+ 16c:	88 23       	and	r24, r24
+ 16e:	19 f0       	breq	.+6      	; 0x176 <CTC_Timer_Interrupt+0x42>
+		{
+			*CurrProcess = 3;
+ 170:	83 e0       	ldi	r24, 0x03	; 3
+ 172:	80 83       	st	Z, r24
+ 174:	69 c0       	rjmp	.+210    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc1Active)
+ 176:	a0 91 64 00 	lds	r26, 0x0064	; 0x800064 <Proc1Active>
+ 17a:	b0 91 65 00 	lds	r27, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 17e:	8c 91       	ld	r24, X
+ 180:	88 23       	and	r24, r24
+ 182:	19 f0       	breq	.+6      	; 0x18a <CTC_Timer_Interrupt+0x56>
+		{
+			*CurrProcess = 1;
+ 184:	81 e0       	ldi	r24, 0x01	; 1
+ 186:	80 83       	st	Z, r24
+ 188:	5f c0       	rjmp	.+190    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else
+		{
+			*CurrProcess = 0;
+ 18a:	10 82       	st	Z, r1
+ 18c:	5d c0       	rjmp	.+186    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		break;
+		case 2:
+		if (*Proc3Active == 1)
+ 18e:	a0 91 60 00 	lds	r26, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 192:	b0 91 61 00 	lds	r27, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 196:	8c 91       	ld	r24, X
+ 198:	81 30       	cpi	r24, 0x01	; 1
+ 19a:	19 f4       	brne	.+6      	; 0x1a2 <CTC_Timer_Interrupt+0x6e>
+		{
+			*CurrProcess = 3;
+ 19c:	83 e0       	ldi	r24, 0x03	; 3
+ 19e:	80 83       	st	Z, r24
+ 1a0:	53 c0       	rjmp	.+166    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc1Active)
+ 1a2:	a0 91 64 00 	lds	r26, 0x0064	; 0x800064 <Proc1Active>
+ 1a6:	b0 91 65 00 	lds	r27, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 1aa:	8c 91       	ld	r24, X
+ 1ac:	88 23       	and	r24, r24
+ 1ae:	19 f0       	breq	.+6      	; 0x1b6 <CTC_Timer_Interrupt+0x82>
+		{
+			*CurrProcess = 1;
+ 1b0:	81 e0       	ldi	r24, 0x01	; 1
+ 1b2:	80 83       	st	Z, r24
+ 1b4:	49 c0       	rjmp	.+146    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc2Active)
+ 1b6:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <Proc2Active>
+ 1ba:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 1be:	8c 91       	ld	r24, X
+ 1c0:	88 23       	and	r24, r24
+ 1c2:	19 f0       	breq	.+6      	; 0x1ca <CTC_Timer_Interrupt+0x96>
+		{
+			*CurrProcess = 2;
+ 1c4:	82 e0       	ldi	r24, 0x02	; 2
+ 1c6:	80 83       	st	Z, r24
+ 1c8:	3f c0       	rjmp	.+126    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else
+		{
+			*CurrProcess = 0;
+ 1ca:	10 82       	st	Z, r1
+ 1cc:	3d c0       	rjmp	.+122    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		break;
+		case 3:
+		if (*Proc1Active == 1)
+ 1ce:	a0 91 64 00 	lds	r26, 0x0064	; 0x800064 <Proc1Active>
+ 1d2:	b0 91 65 00 	lds	r27, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 1d6:	8c 91       	ld	r24, X
+ 1d8:	81 30       	cpi	r24, 0x01	; 1
+ 1da:	11 f4       	brne	.+4      	; 0x1e0 <CTC_Timer_Interrupt+0xac>
+		{
+			*CurrProcess = 1;
+ 1dc:	80 83       	st	Z, r24
+ 1de:	34 c0       	rjmp	.+104    	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc2Active)
+ 1e0:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <Proc2Active>
+ 1e4:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 1e8:	8c 91       	ld	r24, X
+ 1ea:	88 23       	and	r24, r24
+ 1ec:	19 f0       	breq	.+6      	; 0x1f4 <CTC_Timer_Interrupt+0xc0>
+		{
+			*CurrProcess = 2;
+ 1ee:	82 e0       	ldi	r24, 0x02	; 2
+ 1f0:	80 83       	st	Z, r24
+ 1f2:	2a c0       	rjmp	.+84     	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc3Active)
+ 1f4:	a0 91 60 00 	lds	r26, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1f8:	b0 91 61 00 	lds	r27, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 1fc:	8c 91       	ld	r24, X
+ 1fe:	88 23       	and	r24, r24
+ 200:	19 f0       	breq	.+6      	; 0x208 <CTC_Timer_Interrupt+0xd4>
+		{
+			*CurrProcess = 3;
+ 202:	83 e0       	ldi	r24, 0x03	; 3
+ 204:	80 83       	st	Z, r24
+ 206:	20 c0       	rjmp	.+64     	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else
+		{
+			*CurrProcess = 0;
+ 208:	10 82       	st	Z, r1
+ 20a:	1e c0       	rjmp	.+60     	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		break;
+		default:
+		if (*Proc1Active == 1)
+ 20c:	a0 91 64 00 	lds	r26, 0x0064	; 0x800064 <Proc1Active>
+ 210:	b0 91 65 00 	lds	r27, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 214:	8c 91       	ld	r24, X
+ 216:	81 30       	cpi	r24, 0x01	; 1
+ 218:	11 f4       	brne	.+4      	; 0x21e <CTC_Timer_Interrupt+0xea>
+		{
+			*CurrProcess = 1;
+ 21a:	80 83       	st	Z, r24
+ 21c:	15 c0       	rjmp	.+42     	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc2Active)
+ 21e:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <Proc2Active>
+ 222:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 226:	8c 91       	ld	r24, X
+ 228:	88 23       	and	r24, r24
+ 22a:	19 f0       	breq	.+6      	; 0x232 <CTC_Timer_Interrupt+0xfe>
+		{
+			*CurrProcess = 2;
+ 22c:	82 e0       	ldi	r24, 0x02	; 2
+ 22e:	80 83       	st	Z, r24
+ 230:	0b c0       	rjmp	.+22     	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else if(*Proc3Active)
+ 232:	a0 91 60 00 	lds	r26, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 236:	b0 91 61 00 	lds	r27, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 23a:	8c 91       	ld	r24, X
+ 23c:	88 23       	and	r24, r24
+ 23e:	19 f0       	breq	.+6      	; 0x246 <CTC_Timer_Interrupt+0x112>
+		{
+			*CurrProcess = 3;
+ 240:	83 e0       	ldi	r24, 0x03	; 3
+ 242:	80 83       	st	Z, r24
+ 244:	01 c0       	rjmp	.+2      	; 0x248 <CTC_Timer_Interrupt+0x114>
+		}
+		else
+		{
+			*CurrProcess = 0;
+ 246:	10 82       	st	Z, r1
+		}
+		break;
+		
+	}
+	*TimeSliceEND = 1;
+ 248:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 24c:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 250:	81 e0       	ldi	r24, 0x01	; 1
+ 252:	80 83       	st	Z, r24
+ 254:	08 95       	ret
+
+00000256 <RXC_Interrupt>:
+	return;
+}
+void RXC_Interrupt(){
+ 256:	0f 93       	push	r16
+	register uint8_t temp asm("r16");
+	// 	read character from UDR and from r16 register
+	// read from UDR 2 times to consume UDRE flag
+	*InstrAddress = UDR;
+ 258:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+ 25c:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 260:	8c b1       	in	r24, 0x0c	; 12
+ 262:	80 83       	st	Z, r24
+	*InstrAddress = UDR;
+ 264:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+ 268:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 26c:	8c b1       	in	r24, 0x0c	; 12
+ 26e:	80 83       	st	Z, r24
+	*InstrAddress = temp;
+ 270:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+ 274:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 278:	00 83       	st	Z, r16
+	// 	if character is LF it means we have the last char of the instruction
+	// so we check which instruction we have
+	if(*InstrAddress == ASCII_LF){
+ 27a:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+ 27e:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 282:	80 81       	ld	r24, Z
+ 284:	8a 30       	cpi	r24, 0x0A	; 10
+ 286:	89 f4       	brne	.+34     	; 0x2aa <RXC_Interrupt+0x54>
+		InstrAddress = (uint8_t *)0x00A0;
+ 288:	e0 ea       	ldi	r30, 0xA0	; 160
+ 28a:	f0 e0       	ldi	r31, 0x00	; 0
+ 28c:	f0 93 71 00 	sts	0x0071, r31	; 0x800071 <InstrAddress+0x1>
+ 290:	e0 93 70 00 	sts	0x0070, r30	; 0x800070 <InstrAddress>
+		switch(*InstrAddress){
+ 294:	80 81       	ld	r24, Z
+ 296:	81 35       	cpi	r24, 0x51	; 81
+ 298:	29 f0       	breq	.+10     	; 0x2a4 <RXC_Interrupt+0x4e>
+ 29a:	83 35       	cpi	r24, 0x53	; 83
+ 29c:	59 f4       	brne	.+22     	; 0x2b4 <RXC_Interrupt+0x5e>
+			case ASCII_S:
+			ProcStart();
+ 29e:	0e 94 41 00 	call	0x82	; 0x82 <ProcStart>
+			break;
+ 2a2:	08 c0       	rjmp	.+16     	; 0x2b4 <RXC_Interrupt+0x5e>
+			case ASCII_Q:
+			ProcQuit();
+ 2a4:	0e 94 6f 00 	call	0xde	; 0xde <ProcQuit>
+			break;
+ 2a8:	05 c0       	rjmp	.+10     	; 0x2b4 <RXC_Interrupt+0x5e>
+			
+			break;
+		}
+	}
+	else //or move to next char
+	InstrAddress += 1;
+ 2aa:	31 96       	adiw	r30, 0x01	; 1
+ 2ac:	f0 93 71 00 	sts	0x0071, r31	; 0x800071 <InstrAddress+0x1>
+ 2b0:	e0 93 70 00 	sts	0x0070, r30	; 0x800070 <InstrAddress>
+	
+}
+ 2b4:	0f 91       	pop	r16
+ 2b6:	08 95       	ret
+
+000002b8 <UDRE_Interrupt>:
+void UDRE_Interrupt(){
+	// 	send to UDR next character from answer
+	UDR = *UARTAnsAddress;
+ 2b8:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 2bc:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 2c0:	80 81       	ld	r24, Z
+ 2c2:	8c b9       	out	0x0c, r24	; 12
+	UDR = *UARTAnsAddress;
+ 2c4:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 2c8:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 2cc:	80 81       	ld	r24, Z
+ 2ce:	8c b9       	out	0x0c, r24	; 12
+	TCNT2 = *UARTAnsAddress;
+ 2d0:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 2d4:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 2d8:	80 81       	ld	r24, Z
+ 2da:	84 bd       	out	0x24, r24	; 36
+	
+	// 	if character sent is LF we have sent the answer
+	if (*UARTAnsAddress == ASCII_LF)
+ 2dc:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 2e0:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 2e4:	80 81       	ld	r24, Z
+ 2e6:	8a 30       	cpi	r24, 0x0A	; 10
+ 2e8:	49 f4       	brne	.+18     	; 0x2fc <UDRE_Interrupt+0x44>
+	{
+		// 		disable UDRIE interrupt
+		UARTAnsAddress = (uint8_t *)0x0090;
+ 2ea:	80 e9       	ldi	r24, 0x90	; 144
+ 2ec:	90 e0       	ldi	r25, 0x00	; 0
+ 2ee:	90 93 73 00 	sts	0x0073, r25	; 0x800073 <UARTAnsAddress+0x1>
+ 2f2:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <UARTAnsAddress>
+		UCSRB = (1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE);
+ 2f6:	88 ed       	ldi	r24, 0xD8	; 216
+ 2f8:	8a b9       	out	0x0a, r24	; 10
+ 2fa:	08 95       	ret
+	}else //go to next character
+	UARTAnsAddress += 1;
+ 2fc:	31 96       	adiw	r30, 0x01	; 1
+ 2fe:	f0 93 73 00 	sts	0x0073, r31	; 0x800073 <UARTAnsAddress+0x1>
+ 302:	e0 93 72 00 	sts	0x0072, r30	; 0x800072 <UARTAnsAddress>
+ 306:	08 95       	ret
+
+00000308 <UTXC_Interrupt>:
+}
+void UTXC_Interrupt(){
+	InstrAddress = (uint8_t *)0x00A0;
+ 308:	80 ea       	ldi	r24, 0xA0	; 160
+ 30a:	90 e0       	ldi	r25, 0x00	; 0
+ 30c:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+ 310:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+ 314:	25 e0       	ldi	r18, 0x05	; 5
+	uint8_t i;
+	// 	clear instruction so we are ready for the next
+	for (i=0;i<=4;i++){
+		*InstrAddress = 0;
+ 316:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <InstrAddress>
+ 31a:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 31e:	10 82       	st	Z, r1
+		InstrAddress +=1;
+ 320:	80 91 70 00 	lds	r24, 0x0070	; 0x800070 <InstrAddress>
+ 324:	90 91 71 00 	lds	r25, 0x0071	; 0x800071 <InstrAddress+0x1>
+ 328:	01 96       	adiw	r24, 0x01	; 1
+ 32a:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+ 32e:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+ 332:	21 50       	subi	r18, 0x01	; 1
+}
+void UTXC_Interrupt(){
+	InstrAddress = (uint8_t *)0x00A0;
+	uint8_t i;
+	// 	clear instruction so we are ready for the next
+	for (i=0;i<=4;i++){
+ 334:	81 f7       	brne	.-32     	; 0x316 <UTXC_Interrupt+0xe>
+		*InstrAddress = 0;
+		InstrAddress +=1;
+	}
+	InstrAddress = (uint8_t *)0x00A0;
+ 336:	80 ea       	ldi	r24, 0xA0	; 160
+ 338:	90 e0       	ldi	r25, 0x00	; 0
+ 33a:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+ 33e:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+ 342:	08 95       	ret
+
+00000344 <__vector_6>:
+}
+// Interrupt Service Routines
+ISR(TIMER1_COMPA_vect)
+{
+ 344:	1f 92       	push	r1
+ 346:	0f 92       	push	r0
+ 348:	0f b6       	in	r0, 0x3f	; 63
+ 34a:	0f 92       	push	r0
+ 34c:	11 24       	eor	r1, r1
+ 34e:	2f 93       	push	r18
+ 350:	3f 93       	push	r19
+ 352:	4f 93       	push	r20
+ 354:	5f 93       	push	r21
+ 356:	6f 93       	push	r22
+ 358:	7f 93       	push	r23
+ 35a:	8f 93       	push	r24
+ 35c:	9f 93       	push	r25
+ 35e:	af 93       	push	r26
+ 360:	bf 93       	push	r27
+ 362:	ef 93       	push	r30
+ 364:	ff 93       	push	r31
+	CTC_Timer_Interrupt();
+ 366:	0e 94 9a 00 	call	0x134	; 0x134 <CTC_Timer_Interrupt>
+}
+ 36a:	ff 91       	pop	r31
+ 36c:	ef 91       	pop	r30
+ 36e:	bf 91       	pop	r27
+ 370:	af 91       	pop	r26
+ 372:	9f 91       	pop	r25
+ 374:	8f 91       	pop	r24
+ 376:	7f 91       	pop	r23
+ 378:	6f 91       	pop	r22
+ 37a:	5f 91       	pop	r21
+ 37c:	4f 91       	pop	r20
+ 37e:	3f 91       	pop	r19
+ 380:	2f 91       	pop	r18
+ 382:	0f 90       	pop	r0
+ 384:	0f be       	out	0x3f, r0	; 63
+ 386:	0f 90       	pop	r0
+ 388:	1f 90       	pop	r1
+ 38a:	18 95       	reti
+
+0000038c <__vector_11>:
+ISR(USART_RXC_vect)
+{
+ 38c:	1f 92       	push	r1
+ 38e:	0f 92       	push	r0
+ 390:	0f b6       	in	r0, 0x3f	; 63
+ 392:	0f 92       	push	r0
+ 394:	11 24       	eor	r1, r1
+ 396:	2f 93       	push	r18
+ 398:	3f 93       	push	r19
+ 39a:	4f 93       	push	r20
+ 39c:	5f 93       	push	r21
+ 39e:	6f 93       	push	r22
+ 3a0:	7f 93       	push	r23
+ 3a2:	8f 93       	push	r24
+ 3a4:	9f 93       	push	r25
+ 3a6:	af 93       	push	r26
+ 3a8:	bf 93       	push	r27
+ 3aa:	ef 93       	push	r30
+ 3ac:	ff 93       	push	r31
+	RXC_Interrupt();
+ 3ae:	0e 94 2b 01 	call	0x256	; 0x256 <RXC_Interrupt>
+}
+ 3b2:	ff 91       	pop	r31
+ 3b4:	ef 91       	pop	r30
+ 3b6:	bf 91       	pop	r27
+ 3b8:	af 91       	pop	r26
+ 3ba:	9f 91       	pop	r25
+ 3bc:	8f 91       	pop	r24
+ 3be:	7f 91       	pop	r23
+ 3c0:	6f 91       	pop	r22
+ 3c2:	5f 91       	pop	r21
+ 3c4:	4f 91       	pop	r20
+ 3c6:	3f 91       	pop	r19
+ 3c8:	2f 91       	pop	r18
+ 3ca:	0f 90       	pop	r0
+ 3cc:	0f be       	out	0x3f, r0	; 63
+ 3ce:	0f 90       	pop	r0
+ 3d0:	1f 90       	pop	r1
+ 3d2:	18 95       	reti
+
+000003d4 <__vector_12>:
+ISR(USART_UDRE_vect)
+{
+ 3d4:	1f 92       	push	r1
+ 3d6:	0f 92       	push	r0
+ 3d8:	0f b6       	in	r0, 0x3f	; 63
+ 3da:	0f 92       	push	r0
+ 3dc:	11 24       	eor	r1, r1
+ 3de:	2f 93       	push	r18
+ 3e0:	3f 93       	push	r19
+ 3e2:	4f 93       	push	r20
+ 3e4:	5f 93       	push	r21
+ 3e6:	6f 93       	push	r22
+ 3e8:	7f 93       	push	r23
+ 3ea:	8f 93       	push	r24
+ 3ec:	9f 93       	push	r25
+ 3ee:	af 93       	push	r26
+ 3f0:	bf 93       	push	r27
+ 3f2:	ef 93       	push	r30
+ 3f4:	ff 93       	push	r31
+	UDRE_Interrupt();
+ 3f6:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <UDRE_Interrupt>
+}
+ 3fa:	ff 91       	pop	r31
+ 3fc:	ef 91       	pop	r30
+ 3fe:	bf 91       	pop	r27
+ 400:	af 91       	pop	r26
+ 402:	9f 91       	pop	r25
+ 404:	8f 91       	pop	r24
+ 406:	7f 91       	pop	r23
+ 408:	6f 91       	pop	r22
+ 40a:	5f 91       	pop	r21
+ 40c:	4f 91       	pop	r20
+ 40e:	3f 91       	pop	r19
+ 410:	2f 91       	pop	r18
+ 412:	0f 90       	pop	r0
+ 414:	0f be       	out	0x3f, r0	; 63
+ 416:	0f 90       	pop	r0
+ 418:	1f 90       	pop	r1
+ 41a:	18 95       	reti
+
+0000041c <__vector_13>:
+ISR(USART_TXC_vect)
+{
+ 41c:	1f 92       	push	r1
+ 41e:	0f 92       	push	r0
+ 420:	0f b6       	in	r0, 0x3f	; 63
+ 422:	0f 92       	push	r0
+ 424:	11 24       	eor	r1, r1
+ 426:	2f 93       	push	r18
+ 428:	3f 93       	push	r19
+ 42a:	4f 93       	push	r20
+ 42c:	5f 93       	push	r21
+ 42e:	6f 93       	push	r22
+ 430:	7f 93       	push	r23
+ 432:	8f 93       	push	r24
+ 434:	9f 93       	push	r25
+ 436:	af 93       	push	r26
+ 438:	bf 93       	push	r27
+ 43a:	ef 93       	push	r30
+ 43c:	ff 93       	push	r31
+	UTXC_Interrupt();
+ 43e:	0e 94 84 01 	call	0x308	; 0x308 <UTXC_Interrupt>
+}
+ 442:	ff 91       	pop	r31
+ 444:	ef 91       	pop	r30
+ 446:	bf 91       	pop	r27
+ 448:	af 91       	pop	r26
+ 44a:	9f 91       	pop	r25
+ 44c:	8f 91       	pop	r24
+ 44e:	7f 91       	pop	r23
+ 450:	6f 91       	pop	r22
+ 452:	5f 91       	pop	r21
+ 454:	4f 91       	pop	r20
+ 456:	3f 91       	pop	r19
+ 458:	2f 91       	pop	r18
+ 45a:	0f 90       	pop	r0
+ 45c:	0f be       	out	0x3f, r0	; 63
+ 45e:	0f 90       	pop	r0
+ 460:	1f 90       	pop	r1
+ 462:	18 95       	reti
+
+00000464 <initUART>:
+
+void initUART(){
+
+	UBRRL = LOW(UBRRValue);			// load baud prescale
+ 464:	80 e4       	ldi	r24, 0x40	; 64
+ 466:	89 b9       	out	0x09, r24	; 9
+	UBRRH = HIGH(UBRRValue);		// to UBRR
+ 468:	10 bc       	out	0x20, r1	; 32
+
+	UCSRB = (1<<RXEN)|(1<<TXEN)|(1<<RXCIE)|(1<<TXCIE); // enable transmitter, receiver
+ 46a:	88 ed       	ldi	r24, 0xD8	; 216
+ 46c:	8a b9       	out	0x0a, r24	; 10
+	UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);			//Set frame format: 8data, 1stop bit
+ 46e:	86 e8       	ldi	r24, 0x86	; 134
+ 470:	80 bd       	out	0x20, r24	; 32
+ 472:	08 95       	ret
+
+00000474 <initPorts>:
+}
+void initPorts(){
+	// 	Ports Initialization
+	DDRA = 0xFF;	//Port A Initialization as output
+ 474:	8f ef       	ldi	r24, 0xFF	; 255
+ 476:	8a bb       	out	0x1a, r24	; 26
+
+	//	Enable Compare Interrupt
+	TIMSK = (1<<OCIE1A);
+ 478:	80 e1       	ldi	r24, 0x10	; 16
+ 47a:	89 bf       	out	0x39, r24	; 57
+	OCR1AH = HIGH(LoopValue);
+ 47c:	8d e3       	ldi	r24, 0x3D	; 61
+ 47e:	8b bd       	out	0x2b, r24	; 43
+	OCR1AL = LOW(LoopValue);
+ 480:	89 e0       	ldi	r24, 0x09	; 9
+ 482:	8a bd       	out	0x2a, r24	; 42
+	TCCR1B = (1<<CS11)|(1<<CS10)|(1<<WGM12);
+ 484:	8b e0       	ldi	r24, 0x0B	; 11
+ 486:	8e bd       	out	0x2e, r24	; 46
+ 488:	08 95       	ret
+
+0000048a <initRam>:
+}
+void initRam(){
+	
+	// UART answer Initialization
+	*UARTAnsAddress = ASCII_O;
+ 48a:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 48e:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 492:	8f e4       	ldi	r24, 0x4F	; 79
+ 494:	80 83       	st	Z, r24
+	UARTAnsAddress += 1;
+ 496:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 49a:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 49e:	cf 01       	movw	r24, r30
+ 4a0:	01 96       	adiw	r24, 0x01	; 1
+ 4a2:	90 93 73 00 	sts	0x0073, r25	; 0x800073 <UARTAnsAddress+0x1>
+ 4a6:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <UARTAnsAddress>
+	*UARTAnsAddress = ASCII_K;
+ 4aa:	8b e4       	ldi	r24, 0x4B	; 75
+ 4ac:	81 83       	std	Z+1, r24	; 0x01
+	UARTAnsAddress += 1;
+ 4ae:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 4b2:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+ 4b6:	cf 01       	movw	r24, r30
+ 4b8:	01 96       	adiw	r24, 0x01	; 1
+ 4ba:	90 93 73 00 	sts	0x0073, r25	; 0x800073 <UARTAnsAddress+0x1>
+ 4be:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <UARTAnsAddress>
+	*UARTAnsAddress = ASCII_CR;
+ 4c2:	8d e0       	ldi	r24, 0x0D	; 13
+ 4c4:	81 83       	std	Z+1, r24	; 0x01
+	UARTAnsAddress += 1;
+ 4c6:	e0 91 72 00 	lds	r30, 0x0072	; 0x800072 <UARTAnsAddress>
+ 4ca:	f0 91 73 00 	lds	r31, 0x0073	; 0x800073 <UARTAnsAddress+0x1>
+	*UARTAnsAddress = ASCII_LF;
+ 4ce:	8a e0       	ldi	r24, 0x0A	; 10
+ 4d0:	81 83       	std	Z+1, r24	; 0x01
+	UARTAnsAddress += 1;
+	UARTAnsAddress = (uint8_t *)0x0090;
+ 4d2:	80 e9       	ldi	r24, 0x90	; 144
+ 4d4:	90 e0       	ldi	r25, 0x00	; 0
+ 4d6:	90 93 73 00 	sts	0x0073, r25	; 0x800073 <UARTAnsAddress+0x1>
+ 4da:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <UARTAnsAddress>
+	
+	//	Instruction Address Initialization
+	InstrAddress = (uint8_t *)0x00A0;
+ 4de:	80 ea       	ldi	r24, 0xA0	; 160
+ 4e0:	90 e0       	ldi	r25, 0x00	; 0
+ 4e2:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <InstrAddress+0x1>
+ 4e6:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <InstrAddress>
+
+	// 	Left RingCounter init
+	*RingCounterL = 0b00000001;
+ 4ea:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <RingCounterL>
+ 4ee:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <RingCounterL+0x1>
+ 4f2:	81 e0       	ldi	r24, 0x01	; 1
+ 4f4:	80 83       	st	Z, r24
+
+	// 	Right RingCounter init
+	*RingCounterR = 0b10000000;
+ 4f6:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <RingCounterR>
+ 4fa:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <RingCounterR+0x1>
+ 4fe:	80 e8       	ldi	r24, 0x80	; 128
+ 500:	80 83       	st	Z, r24
+
+	// 	Led Toggle init
+	*LedToggle = 0b01010101;
+ 502:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <LedToggle>
+ 506:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <LedToggle+0x1>
+ 50a:	85 e5       	ldi	r24, 0x55	; 85
+ 50c:	80 83       	st	Z, r24
+
+	//	TimeSliceEND init
+	*TimeSliceEND = 0;
+ 50e:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 512:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 516:	10 82       	st	Z, r1
+	//	Current Process
+	*CurrProcess = 0;
+ 518:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <CurrProcess>
+ 51c:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <CurrProcess+0x1>
+ 520:	10 82       	st	Z, r1
+	//	Process1 Active
+	*Proc1Active = 0;
+ 522:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <Proc1Active>
+ 526:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <Proc1Active+0x1>
+ 52a:	10 82       	st	Z, r1
+	//	Process2 Active
+	*Proc2Active = 0;
+ 52c:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <Proc2Active>
+ 530:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <Proc2Active+0x1>
+ 534:	10 82       	st	Z, r1
+	//	Process3 Active
+	*Proc3Active = 0;
+ 536:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 53a:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 53e:	10 82       	st	Z, r1
+ 540:	08 95       	ret
+
+00000542 <initialisation>:
+}
+void initialisation(void){
+	
+	//Chip Initializations
+	initUART();
+ 542:	0e 94 32 02 	call	0x464	; 0x464 <initUART>
+	initPorts();
+ 546:	0e 94 3a 02 	call	0x474	; 0x474 <initPorts>
+	initRam();
+ 54a:	0e 94 45 02 	call	0x48a	; 0x48a <initRam>
+	sei();
+ 54e:	78 94       	sei
+ 550:	08 95       	ret
+
+00000552 <Proc1>:
+}
+
+void Proc1(){
+	
+	// 	Ringcounter Left
+	if (*RingCounterL == 0b00000000)
+ 552:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <RingCounterL>
+ 556:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <RingCounterL+0x1>
+ 55a:	80 81       	ld	r24, Z
+ 55c:	81 11       	cpse	r24, r1
+ 55e:	03 c0       	rjmp	.+6      	; 0x566 <Proc1+0x14>
+	{
+		*RingCounterL = 0b00000001;
+ 560:	81 e0       	ldi	r24, 0x01	; 1
+ 562:	80 83       	st	Z, r24
+ 564:	03 c0       	rjmp	.+6      	; 0x56c <Proc1+0x1a>
+		}else{
+		*RingCounterL = *RingCounterL << 1;
+ 566:	80 81       	ld	r24, Z
+ 568:	88 0f       	add	r24, r24
+ 56a:	80 83       	st	Z, r24
+	}
+	
+	PORTA = *RingCounterL;
+ 56c:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <RingCounterL>
+ 570:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <RingCounterL+0x1>
+ 574:	80 81       	ld	r24, Z
+ 576:	8b bb       	out	0x1b, r24	; 27
+ 578:	08 95       	ret
+
+0000057a <Proc2>:
+}
+
+void Proc2(){
+	
+	// 	Ringcounter Right
+	if (*RingCounterR == 0b00000000)
+ 57a:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <RingCounterR>
+ 57e:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <RingCounterR+0x1>
+ 582:	80 81       	ld	r24, Z
+ 584:	81 11       	cpse	r24, r1
+ 586:	03 c0       	rjmp	.+6      	; 0x58e <Proc2+0x14>
+	{
+		*RingCounterR = 0b10000000;
+ 588:	80 e8       	ldi	r24, 0x80	; 128
+ 58a:	80 83       	st	Z, r24
+ 58c:	03 c0       	rjmp	.+6      	; 0x594 <Proc2+0x1a>
+		}else{
+		*RingCounterR = *RingCounterR >> 1;
+ 58e:	80 81       	ld	r24, Z
+ 590:	86 95       	lsr	r24
+ 592:	80 83       	st	Z, r24
+	}
+	PORTA = *RingCounterR;
+ 594:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <RingCounterR>
+ 598:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <RingCounterR+0x1>
+ 59c:	80 81       	ld	r24, Z
+ 59e:	8b bb       	out	0x1b, r24	; 27
+ 5a0:	08 95       	ret
+
+000005a2 <Proc3>:
+	// Return is not necessary because Compiler adds- return in disassembly
+}
+
+void Proc3(){
+	
+	*LedToggle = *LedToggle ^ 0b11111111;
+ 5a2:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <LedToggle>
+ 5a6:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <LedToggle+0x1>
+ 5aa:	80 81       	ld	r24, Z
+ 5ac:	80 95       	com	r24
+ 5ae:	80 83       	st	Z, r24
+	
+	PORTA = *LedToggle;
+ 5b0:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <LedToggle>
+ 5b4:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <LedToggle+0x1>
+ 5b8:	80 81       	ld	r24, Z
+ 5ba:	8b bb       	out	0x1b, r24	; 27
+	
+	*TimeSliceEND = 0;
+ 5bc:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 5c0:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 5c4:	10 82       	st	Z, r1
+ 5c6:	08 95       	ret
+
+000005c8 <main>:
+	// Return is not necessary because Compiler adds- return in disassembly
+}
+int main(void)
+{
+	initialisation();
+ 5c8:	0e 94 a1 02 	call	0x542	; 0x542 <initialisation>
+	while (1)
+	{
+		switch(*CurrProcess){
+ 5cc:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <CurrProcess>
+ 5d0:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <CurrProcess+0x1>
+ 5d4:	80 81       	ld	r24, Z
+ 5d6:	82 30       	cpi	r24, 0x02	; 2
+ 5d8:	69 f0       	breq	.+26     	; 0x5f4 <main+0x2c>
+ 5da:	83 30       	cpi	r24, 0x03	; 3
+ 5dc:	19 f0       	breq	.+6      	; 0x5e4 <main+0x1c>
+ 5de:	81 30       	cpi	r24, 0x01	; 1
+ 5e0:	c9 f5       	brne	.+114    	; 0x654 <main+0x8c>
+ 5e2:	10 c0       	rjmp	.+32     	; 0x604 <main+0x3c>
+			*TimeSliceEND = 0;
+			
+			break;
+			case 3:
+			
+			while(*TimeSliceEND == 0)
+ 5e4:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 5e8:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 5ec:	80 81       	ld	r24, Z
+ 5ee:	88 23       	and	r24, r24
+ 5f0:	31 f1       	breq	.+76     	; 0x63e <main+0x76>
+ 5f2:	2e c0       	rjmp	.+92     	; 0x650 <main+0x88>
+			*TimeSliceEND = 0;
+
+			break;
+			case 2:
+			
+			while(*TimeSliceEND == 0)
+ 5f4:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 5f8:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 5fc:	80 81       	ld	r24, Z
+ 5fe:	88 23       	and	r24, r24
+ 600:	99 f0       	breq	.+38     	; 0x628 <main+0x60>
+ 602:	1b c0       	rjmp	.+54     	; 0x63a <main+0x72>
+	while (1)
+	{
+		switch(*CurrProcess){
+			case 1:
+			
+			while(*TimeSliceEND == 0){
+ 604:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 608:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 60c:	80 81       	ld	r24, Z
+ 60e:	81 11       	cpse	r24, r1
+ 610:	09 c0       	rjmp	.+18     	; 0x624 <main+0x5c>
+				
+				Proc1();
+ 612:	0e 94 a9 02 	call	0x552	; 0x552 <Proc1>
+	while (1)
+	{
+		switch(*CurrProcess){
+			case 1:
+			
+			while(*TimeSliceEND == 0){
+ 616:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 61a:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 61e:	80 81       	ld	r24, Z
+ 620:	88 23       	and	r24, r24
+ 622:	b9 f3       	breq	.-18     	; 0x612 <main+0x4a>
+				
+				Proc1();
+				
+			}
+			*TimeSliceEND = 0;
+ 624:	10 82       	st	Z, r1
+
+			break;
+ 626:	d2 cf       	rjmp	.-92     	; 0x5cc <main+0x4>
+			case 2:
+			
+			while(*TimeSliceEND == 0)
+			{
+				Proc2();
+ 628:	0e 94 bd 02 	call	0x57a	; 0x57a <Proc2>
+			*TimeSliceEND = 0;
+
+			break;
+			case 2:
+			
+			while(*TimeSliceEND == 0)
+ 62c:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 630:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 634:	80 81       	ld	r24, Z
+ 636:	88 23       	and	r24, r24
+ 638:	b9 f3       	breq	.-18     	; 0x628 <main+0x60>
+			{
+				Proc2();
+			}
+			*TimeSliceEND = 0;
+ 63a:	10 82       	st	Z, r1
+			
+			break;
+ 63c:	c7 cf       	rjmp	.-114    	; 0x5cc <main+0x4>
+			case 3:
+			
+			while(*TimeSliceEND == 0)
+			{
+				Proc3();
+ 63e:	0e 94 d1 02 	call	0x5a2	; 0x5a2 <Proc3>
+			*TimeSliceEND = 0;
+			
+			break;
+			case 3:
+			
+			while(*TimeSliceEND == 0)
+ 642:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <TimeSliceEND>
+ 646:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <TimeSliceEND+0x1>
+ 64a:	80 81       	ld	r24, Z
+ 64c:	88 23       	and	r24, r24
+ 64e:	b9 f3       	breq	.-18     	; 0x63e <main+0x76>
+			{
+				Proc3();
+			}
+			*TimeSliceEND = 0;
+ 650:	10 82       	st	Z, r1
+			
+			break;
+ 652:	bc cf       	rjmp	.-136    	; 0x5cc <main+0x4>
+			default:
+			CTC_Timer_Interrupt();
+ 654:	0e 94 9a 00 	call	0x134	; 0x134 <CTC_Timer_Interrupt>
+			break;
+ 658:	b9 cf       	rjmp	.-142    	; 0x5cc <main+0x4>
+
+0000065a <_exit>:
+ 65a:	f8 94       	cli
+
+0000065c <__stop_program>:
+ 65c:	ff cf       	rjmp	.-2      	; 0x65c <__stop_program>
